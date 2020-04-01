@@ -1,7 +1,7 @@
 # Личный проект «Киноман» [![Build status][travis-image]][travis-url]
 
 * Студент: [Илья Антипов](https://up.htmlacademy.ru/ecmascript/11/user/1392281).
-* Наставник: `Неизвестно`.
+* Наставник: [Алексей Тирман](https://htmlacademy.ru/profile/id1411325).
 
 ---
 
