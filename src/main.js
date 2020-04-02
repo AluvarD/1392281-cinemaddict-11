@@ -26,6 +26,16 @@ const createNavigationMenu = () => {
     );
 };
 
+const createSortMenu = () => {
+    return (
+        `<ul class="sort">
+    <li><a href="#" class="sort__button sort__button--active">Sort by default</a></li>
+    <li><a href="#" class="sort__button">Sort by date</a></li>
+    <li><a href="#" class="sort__button">Sort by rating</a></li>
+  </ul>`
+    );
+};
+
 const createFilmCard = () => {
     return (
         `<article class="film-card">
@@ -104,13 +114,14 @@ const render = (container, template, place) => {
 
 // собираем header
 const siteHeaderElement = document.querySelector(`.header`);
-const userHeaderElement = siteHeaderElement.querySelector(`.header__profile`);
 render(siteHeaderElement, createUserRating(), `beforeend`);
 
 // собираем main
 const siteMainElement = document.querySelector(`.main`);
-const NavigationMenu = siteMainElement.querySelector(`.main-navigation`);
 render(siteMainElement, createNavigationMenu(), `beforeend`);
+
+//sort menu
+render(siteMainElement, createSortMenu(), `beforeend`);
 
 // собираем фильмы
 const filmListElemet = siteMainElement.querySelector(`.main`);
@@ -122,7 +133,7 @@ for (let i = 0; i < FILM_COUNT; i++) {
 
 // button
 const buttonShowMore = siteMainElement.querySelector(`.films-list`);
-render(siteMainElement, createButtonShowMore(), `beforeend`);
+render(buttonShowMore, createButtonShowMore(), `beforeend`);
 
 //top
 const filmListElemetTop = siteMainElement.querySelector(`.films`);
@@ -149,4 +160,4 @@ for (let i = 0; i < FILM_COUNT_TOP_COMMENTED; i++) {
 const siteFooterElement = document.querySelector(`.footer`);
 console.log(siteFooterElement);
 const statisticElement = siteFooterElement.querySelector(`.footer__statistics`);
-render(siteFooterElement, createSectionStatistic(), `beforeend`);
+render(statisticElement, createSectionStatistic(), `beforeend`);
