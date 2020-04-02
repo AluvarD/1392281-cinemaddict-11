@@ -124,7 +124,6 @@ render(siteMainElement, createNavigationMenu(), `beforeend`);
 render(siteMainElement, createSortMenu(), `beforeend`);
 
 // собираем фильмы
-const filmListElemet = siteMainElement.querySelector(`.main`);
 render(siteMainElement, createSectionFilm(), `beforeend`);
 const filmCard = siteMainElement.querySelector(`.films-list__container`);
 for (let i = 0; i < FILM_COUNT; i++) {
@@ -158,6 +157,5 @@ for (let i = 0; i < FILM_COUNT_TOP_COMMENTED; i++) {
 
 //statistic
 const siteFooterElement = document.querySelector(`.footer`);
-console.log(siteFooterElement);
 const statisticElement = siteFooterElement.querySelector(`.footer__statistics`);
 render(statisticElement, createSectionStatistic(), `beforeend`);
