@@ -7,6 +7,8 @@ import { createSectionFilm } from "./components/sectionfilm.js";
 import { createSectionTop } from "./components/sectiontop.js";
 import { createSectionCommented } from "./components/sectioncommented.js";
 import { createSectionStatistic } from "./components/statistic.js";
+import { generateFilms } from "./mock/film.js";
+import { generateNavigation } from "./mock/navigation.js";
 
 const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);
@@ -17,19 +19,24 @@ const siteHeaderElement = document.querySelector(`.header`);
 render(siteHeaderElement, createUserRating(), `beforeend`);
 
 // собираем main
+const navigations = generateNavigation();
 const siteMainElement = document.querySelector(`.main`);
-render(siteMainElement, createNavigationMenu(), `beforeend`);
+render(siteMainElement, createNavigationMenu(navigations), `beforeend`);
 
 // sort menu
 render(siteMainElement, createSortMenu(), `beforeend`);
 
 // собираем фильмы
 const FILM_COUNT = 5;
-render(siteMainElement, createSectionFilm(), `beforeend`);
+const films = generateFilms();
 const filmCard = siteMainElement.querySelector(`.films-list__container`);
-for (let i = 0; i < FILM_COUNT; i++) {
-  render(filmCard, createFilmCard(), `beforeend`);
-}
+render(siteMainElement, createSectionFilm(), `beforeend`);
+films.slice(0, FILM_COUNT).forEach((films) => render(filmCard, createFilmCard(films), `beforeend`));
+
+//const filmCard = siteMainElement.querySelector(`.films-list__container`);
+//for (let i = 0; i < films.length; i++) {
+//  render(filmCard, createFilmCard(films[i]), `beforeend`);
+//}
 
 // button
 const buttonShowMore = siteMainElement.querySelector(`.films-list`);
