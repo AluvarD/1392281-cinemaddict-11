@@ -1,5 +1,5 @@
-export const createFilmCard = (film) => {
-  const { name, rating, year, duration, genre, poster, description, comments } = film;
+export const createFilmCard = (films) => {
+  const { name, rating, year, duration, genre, poster, description, comments } = films;
 
   return (
     `<article class="film-card">

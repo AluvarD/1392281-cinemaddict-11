@@ -26,21 +26,32 @@ render(siteMainElement, createNavigationMenu(navigations), `beforeend`);
 // sort menu
 render(siteMainElement, createSortMenu(), `beforeend`);
 
-// собираем фильмы
-const FILM_COUNT = 5;
-const films = generateFilms();
-const filmCard = siteMainElement.querySelector(`.films-list__container`);
+// собираем место для карточек фильмов
 render(siteMainElement, createSectionFilm(), `beforeend`);
-films.slice(0, FILM_COUNT).forEach((films) => render(filmCard, createFilmCard(films), `beforeend`));
+const filmCard = siteMainElement.querySelector(`.films-list__container`);
 
-//const filmCard = siteMainElement.querySelector(`.films-list__container`);
-//for (let i = 0; i < films.length; i++) {
-//  render(filmCard, createFilmCard(films[i]), `beforeend`);
-//}
+
+// собираем фильмы
+const FILM_COUNT = 20;
+const FILM_COUNT_ON_START = 5;
+const FILM_COUNT_BY_BUTTON = 5;
+let filmCountOnStart = FILM_COUNT_ON_START;
+const films = generateFilms(FILM_COUNT);
+films.slice(0, filmCountOnStart).forEach((films) => render(filmCard, createFilmCard(films), `beforeend`));
 
 // button
 const buttonShowMore = siteMainElement.querySelector(`.films-list`);
 render(buttonShowMore, createButtonShowMore(), `beforeend`);
+const buttonShowMoreActive = buttonShowMore.querySelector(`.films-list__show-more`);
+buttonShowMoreActive.addEventListener(`click`, () => {
+  const prevFilmCount = filmCountOnStart;
+  filmCountOnStart = filmCountOnStart + FILM_COUNT_BY_BUTTON;
+  films.slice(prevFilmCount, filmCountOnStart).forEach((films) => render(filmCard, createFilmCard(films), `beforeend`));
+
+  if (filmCountOnStart >= films.length) {
+    buttonShowMoreActive.remove();
+  }
+});
 
 // top
 const filmListElemetTop = siteMainElement.querySelector(`.films`);
@@ -54,15 +65,11 @@ render(filmListElemetCommented, createSectionCommented(), `beforeend`);
 const FILM_COUNT_TOP_COMMENTED = 2;
 const siteRatingEelement = document.querySelectorAll(`.films-list--extra`)
 const filmCardTop = siteRatingEelement[0].querySelector(`.films-list__container`);
-for (let i = 0; i < FILM_COUNT_TOP_COMMENTED; i++) {
-  render(filmCardTop, createFilmCard(), `beforeend`);
-}
+films.slice(0, FILM_COUNT_TOP_COMMENTED).forEach((films) => render(filmCardTop, createFilmCard(films), `beforeend`));
 
 // film to commented
 const filmCardCommented = siteRatingEelement[1].querySelector(`.films-list__container`);
-for (let i = 0; i < FILM_COUNT_TOP_COMMENTED; i++) {
-  render(filmCardCommented, createFilmCard(), `beforeend`);
-}
+films.slice(0, FILM_COUNT_TOP_COMMENTED).forEach((films) => render(filmCardCommented, createFilmCard(films), `beforeend`));
 
 // statistic
 const siteFooterElement = document.querySelector(`.footer`);
