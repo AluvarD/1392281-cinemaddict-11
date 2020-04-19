@@ -1,10 +1,10 @@
-import { TITTLE } from "../const.js";
-import { GENRE } from "../const.js";
-import { POSTER } from "../const.js";
-import { DESCRIPTION } from "../const.js";
+import {TITTLES} from "../const.js";
+import {GENRES} from "../const.js";
+import {POSTERS} from "../const.js";
+import {DESCRIPTIONS} from "../const.js";
 
 const getRandomArrayItem = (array) => {
-  const randomIndex = randomIntegerNumber(0, array.length);
+  const randomIndex = randomIntegerNumber(0, array.length - 1);
 
   return array[randomIndex];
 };
@@ -14,18 +14,18 @@ const randomIntegerNumber = (min, max) => {
 };
 
 const generateFilms = () => {
-  return TITTLE.map((it) => {
+  return TITTLES.map((it) => {
     return {
       name: it,
       rating: Math.floor(Math.random() * 9) + `.` + Math.floor(Math.random() * 9),
       year: randomIntegerNumber(1950, 2019),
       duration: Math.floor(Math.random() * 250),
-      genre: getRandomArrayItem(GENRE),
-      poster: getRandomArrayItem(POSTER),
-      description: getRandomArrayItem(DESCRIPTION),
+      genre: getRandomArrayItem(GENRES),
+      poster: getRandomArrayItem(POSTERS),
+      description: getRandomArrayItem(DESCRIPTIONS),
       comments: Math.floor(Math.random() * 100),
     };
   });
 };
 
-export { generateFilms };
+export {generateFilms};

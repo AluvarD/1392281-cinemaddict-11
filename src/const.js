@@ -1,4 +1,4 @@
-export const TITTLE = [
+export const TITTLES = [
   `The Dance of Life`,
   `Sagebrush Trail`,
   `The Man with the Golden Arm`,
@@ -21,7 +21,7 @@ export const TITTLE = [
   `Popeye the Sailor Meets Sindbad the Sailor`,
 ];
 
-export const GENRE = [
+export const GENRES = [
   `Musical`,
   `Western`,
   `Drama`,
@@ -44,7 +44,7 @@ export const GENRE = [
   `Cartoon`,
 ];
 
-export const POSTER = [
+export const POSTERS = [
   `../posters/the-dance-of-life.jpg`,
   `../posters/sagebrush-trail.jpg`,
   `../posters/the-man-with-the-golden-arm.jpg`,
@@ -67,7 +67,7 @@ export const POSTER = [
   `../posters/popeye-meets-sinbad.png`,
 ];
 
-export const DESCRIPTION = [
+export const DESCRIPTIONS = [
   `Burlesque comic Ralph "Skid" Johnson (Skelly), and specialty dancer Bonny Lee King (Carroll), end up together on a cold, rainy night at a tr…`,
   `Sentenced for a murder he did not commit, John Brant escapes from prison determined to find the real killer. By chance Brant's narrow escap…`,
   `Frankie Machine (Frank Sinatra) is released from the federal Narcotic Farm in Lexington, Kentucky with a set of drums and a new outlook on…`,

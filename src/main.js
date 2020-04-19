@@ -1,14 +1,14 @@
-import { createUserRating } from "./components/userrating.js";
-import { createNavigationMenu } from "./components/navigationmenu.js";
-import { createSortMenu } from "./components/sortmenu.js";
-import { createFilmCard } from "./components/filmcard.js";
-import { createButtonShowMore } from "./components/buttonshowmore.js";
-import { createSectionFilm } from "./components/sectionfilm.js";
-import { createSectionTop } from "./components/sectiontop.js";
-import { createSectionCommented } from "./components/sectioncommented.js";
-import { createSectionStatistic } from "./components/statistic.js";
-import { generateFilms } from "./mock/film.js";
-import { generateNavigation } from "./mock/navigation.js";
+import {createUserRating} from "./components/userrating.js";
+import {createNavigationMenu} from "./components/navigationmenu.js";
+import {createSortMenu} from "./components/sortmenu.js";
+import {createFilmCard} from "./components/filmcard.js";
+import {createButtonShowMore} from "./components/buttonshowmore.js";
+import {createSectionFilm} from "./components/sectionfilm.js";
+import {createSectionTop} from "./components/sectiontop.js";
+import {createSectionCommented} from "./components/sectioncommented.js";
+import {createSectionStatistic} from "./components/statistic.js";
+import {generateFilms} from "./mock/film.js";
+import {generateNavigation} from "./mock/navigation.js";
 
 const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);
@@ -32,12 +32,11 @@ const filmCard = siteMainElement.querySelector(`.films-list__container`);
 
 
 // собираем фильмы
-const FILM_COUNT = 20;
 const FILM_COUNT_ON_START = 5;
 const FILM_COUNT_BY_BUTTON = 5;
 let filmCountOnStart = FILM_COUNT_ON_START;
-const films = generateFilms(FILM_COUNT);
-films.slice(0, filmCountOnStart).forEach((films) => render(filmCard, createFilmCard(films), `beforeend`));
+const film = generateFilms(FILM_COUNT_ON_START);
+film.slice(0, filmCountOnStart).forEach((film) => render(filmCard, createFilmCard(film), `beforeend`));
 
 // button
 const buttonShowMore = siteMainElement.querySelector(`.films-list`);
@@ -46,9 +45,9 @@ const buttonShowMoreActive = buttonShowMore.querySelector(`.films-list__show-mor
 buttonShowMoreActive.addEventListener(`click`, () => {
   const prevFilmCount = filmCountOnStart;
   filmCountOnStart = filmCountOnStart + FILM_COUNT_BY_BUTTON;
-  films.slice(prevFilmCount, filmCountOnStart).forEach((films) => render(filmCard, createFilmCard(films), `beforeend`));
+  film.slice(prevFilmCount, filmCountOnStart).forEach((film) => render(filmCard, createFilmCard(film), `beforeend`));
 
-  if (filmCountOnStart >= films.length) {
+  if (filmCountOnStart >= film.length) {
     buttonShowMoreActive.remove();
   }
 });
@@ -65,11 +64,11 @@ render(filmListElemetCommented, createSectionCommented(), `beforeend`);
 const FILM_COUNT_TOP_COMMENTED = 2;
 const siteRatingEelement = document.querySelectorAll(`.films-list--extra`)
 const filmCardTop = siteRatingEelement[0].querySelector(`.films-list__container`);
-films.slice(0, FILM_COUNT_TOP_COMMENTED).forEach((films) => render(filmCardTop, createFilmCard(films), `beforeend`));
+film.slice(0, FILM_COUNT_TOP_COMMENTED).forEach((film) => render(filmCardTop, createFilmCard(film), `beforeend`));
 
 // film to commented
 const filmCardCommented = siteRatingEelement[1].querySelector(`.films-list__container`);
-films.slice(0, FILM_COUNT_TOP_COMMENTED).forEach((films) => render(filmCardCommented, createFilmCard(films), `beforeend`));
+film.slice(0, FILM_COUNT_TOP_COMMENTED).forEach((film) => render(filmCardCommented, createFilmCard(film), `beforeend`));
 
 // statistic
 const siteFooterElement = document.querySelector(`.footer`);

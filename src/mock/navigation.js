@@ -11,4 +11,4 @@ const generateNavigation = () => {
   });
 };
 
-export { generateNavigation };
+export {generateNavigation};
