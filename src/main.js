@@ -34,20 +34,20 @@ const filmCard = siteMainElement.querySelector(`.films-list__container`);
 // собираем фильмы
 const FILM_COUNT_ON_START = 5;
 const FILM_COUNT_BY_BUTTON = 5;
-let filmCountOnStart = FILM_COUNT_ON_START;
+let filmCountAtWork = FILM_COUNT_ON_START;
 const film = generateFilms(FILM_COUNT_ON_START);
-film.slice(0, filmCountOnStart).forEach((film) => render(filmCard, createFilmCard(film), `beforeend`));
+film.slice(0, filmCountAtWork).forEach((film) => render(filmCard, createFilmCard(film), `beforeend`));
 
 // button
 const buttonShowMore = siteMainElement.querySelector(`.films-list`);
 render(buttonShowMore, createButtonShowMore(), `beforeend`);
 const buttonShowMoreActive = buttonShowMore.querySelector(`.films-list__show-more`);
 buttonShowMoreActive.addEventListener(`click`, () => {
-  const prevFilmCount = filmCountOnStart;
-  filmCountOnStart = filmCountOnStart + FILM_COUNT_BY_BUTTON;
-  film.slice(prevFilmCount, filmCountOnStart).forEach((film) => render(filmCard, createFilmCard(film), `beforeend`));
+  const prevFilmCount = filmCountAtWork;
+  filmCountAtWork = filmCountAtWork + FILM_COUNT_BY_BUTTON;
+  film.slice(prevFilmCount, filmCountAtWork).forEach((film) => render(filmCard, createFilmCard(film), `beforeend`));
 
-  if (filmCountOnStart >= film.length) {
+  if (filmCountAtWork >= film.length) {
     buttonShowMoreActive.remove();
   }
 });

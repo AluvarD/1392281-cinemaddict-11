@@ -1,4 +1,4 @@
-import {TITTLES} from "../const.js";
+import {TITLES} from "../const.js";
 import {GENRES} from "../const.js";
 import {POSTERS} from "../const.js";
 import {DESCRIPTIONS} from "../const.js";
@@ -13,10 +13,12 @@ const randomIntegerNumber = (min, max) => {
   return min + Math.floor(Math.random() * (max - min));
 };
 
+const FILM_COUNT = 20;
+
 const generateFilms = () => {
-  return TITTLES.map((it) => {
+  return Array(FILM_COUNT).fill(TITLES).map(() => {
     return {
-      name: it,
+      name: getRandomArrayItem(TITLES),
       rating: Math.floor(Math.random() * 9) + `.` + Math.floor(Math.random() * 9),
       year: randomIntegerNumber(1950, 2019),
       duration: Math.floor(Math.random() * 250),

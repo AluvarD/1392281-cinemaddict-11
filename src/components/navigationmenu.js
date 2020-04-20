@@ -1,10 +1,10 @@
 const createNavigationMarkup = (navigation, isActive) => {
   const {name, count} = navigation;
-  const tagName = (name === `All`);
-  const nonAllTag = tagName ? `` : `<span class="main-navigation__item-count">${count}</span>`;
+  const countInfo = (name === `All`) ? `` : `<span class="main-navigation__item-count">${count}</span>`;
+  const activeCheck = isActive ? `--active` : ``;
 
   return (
-    `<a href="#${name.toLowerCase()}" class="main-navigation__item main-navigation__item${isActive ? `--active` : ``}">${name} movies${nonAllTag}</a>`
+    `<a href="#${name.toLowerCase()}" class="main-navigation__item main-navigation__item${activeCheck}">${name} movies${countInfo}</a>`
   );
 };
 

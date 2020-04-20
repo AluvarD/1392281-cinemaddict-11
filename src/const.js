@@ -1,24 +1,9 @@
-export const TITTLES = [
+export const TITLES = [
   `The Dance of Life`,
   `Sagebrush Trail`,
   `The Man with the Golden Arm`,
   `Santa Claus Conquers the Martians`,
   `Popeye the Sailor Meets Sindbad the Sailor`,
-  `The Martian`,
-  `The Hitchhiker's Guide to the Galaxy`,
-  `The Avengers`,
-  `Papillon`,
-  `The Lost City of Z`,
-  `The Core`,
-  `Armageddon`,
-  `Kingdom of Heaven`,
-  `The Lord of the Rings`,
-  `The Hobbit: An Unexpected Journey`,
-  `Avatar`,
-  `Metallica Through the Never`,
-  `The Gentlemen`,
-  `The Wolf of Wall Street`,
-  `Django Unchained`,
 ];
 
 export const GENRES = [
