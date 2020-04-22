@@ -1,12 +1,14 @@
-import { createUserRating } from "./components/userrating.js";
-import { createNavigationMenu } from "./components/navigationmenu.js";
-import { createSortMenu } from "./components/sortmenu.js";
-import { createFilmCard } from "./components/filmcard.js";
-import { createButtonShowMore } from "./components/buttonshowmore.js";
-import { createSectionFilm } from "./components/sectionfilm.js";
-import { createSectionTop } from "./components/sectiontop.js";
-import { createSectionCommented } from "./components/sectioncommented.js";
-import { createSectionStatistic } from "./components/statistic.js";
+import {createUserRating} from "./components/userrating.js";
+import {createNavigationMenu} from "./components/navigationmenu.js";
+import {createSortMenu} from "./components/sortmenu.js";
+import {createFilmCard} from "./components/filmcard.js";
+import {createButtonShowMore} from "./components/buttonshowmore.js";
+import {createSectionFilm} from "./components/sectionfilm.js";
+import {createSectionTop} from "./components/sectiontop.js";
+import {createSectionCommented} from "./components/sectioncommented.js";
+import {createSectionStatistic} from "./components/statistic.js";
+import {generateFilms} from "./mock/film.js";
+import {generateNavigation} from "./mock/navigation.js";
 
 const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);
@@ -17,23 +19,38 @@ const siteHeaderElement = document.querySelector(`.header`);
 render(siteHeaderElement, createUserRating(), `beforeend`);
 
 // собираем main
+const navigations = generateNavigation();
 const siteMainElement = document.querySelector(`.main`);
-render(siteMainElement, createNavigationMenu(), `beforeend`);
+render(siteMainElement, createNavigationMenu(navigations), `beforeend`);
 
 // sort menu
 render(siteMainElement, createSortMenu(), `beforeend`);
 
-// собираем фильмы
-const FILM_COUNT = 5;
+// собираем место для карточек фильмов
 render(siteMainElement, createSectionFilm(), `beforeend`);
 const filmCard = siteMainElement.querySelector(`.films-list__container`);
-for (let i = 0; i < FILM_COUNT; i++) {
-  render(filmCard, createFilmCard(), `beforeend`);
-}
+
+
+// собираем фильмы
+const FILM_COUNT_ON_START = 5;
+const FILM_COUNT_BY_BUTTON = 5;
+let filmCountAtWork = FILM_COUNT_ON_START;
+const film = generateFilms(FILM_COUNT_ON_START);
+film.slice(0, filmCountAtWork).forEach((film) => render(filmCard, createFilmCard(film), `beforeend`));
 
 // button
 const buttonShowMore = siteMainElement.querySelector(`.films-list`);
 render(buttonShowMore, createButtonShowMore(), `beforeend`);
+const buttonShowMoreActive = buttonShowMore.querySelector(`.films-list__show-more`);
+buttonShowMoreActive.addEventListener(`click`, () => {
+  const prevFilmCount = filmCountAtWork;
+  filmCountAtWork = filmCountAtWork + FILM_COUNT_BY_BUTTON;
+  film.slice(prevFilmCount, filmCountAtWork).forEach((film) => render(filmCard, createFilmCard(film), `beforeend`));
+
+  if (filmCountAtWork >= film.length) {
+    buttonShowMoreActive.remove();
+  }
+});
 
 // top
 const filmListElemetTop = siteMainElement.querySelector(`.films`);
@@ -47,15 +64,11 @@ render(filmListElemetCommented, createSectionCommented(), `beforeend`);
 const FILM_COUNT_TOP_COMMENTED = 2;
 const siteRatingEelement = document.querySelectorAll(`.films-list--extra`)
 const filmCardTop = siteRatingEelement[0].querySelector(`.films-list__container`);
-for (let i = 0; i < FILM_COUNT_TOP_COMMENTED; i++) {
-  render(filmCardTop, createFilmCard(), `beforeend`);
-}
+film.slice(0, FILM_COUNT_TOP_COMMENTED).forEach((film) => render(filmCardTop, createFilmCard(film), `beforeend`));
 
 // film to commented
 const filmCardCommented = siteRatingEelement[1].querySelector(`.films-list__container`);
-for (let i = 0; i < FILM_COUNT_TOP_COMMENTED; i++) {
-  render(filmCardCommented, createFilmCard(), `beforeend`);
-}
+film.slice(0, FILM_COUNT_TOP_COMMENTED).forEach((film) => render(filmCardCommented, createFilmCard(film), `beforeend`));
 
 // statistic
 const siteFooterElement = document.querySelector(`.footer`);
