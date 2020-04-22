@@ -16,7 +16,7 @@ const randomIntegerNumber = (min, max) => {
 const FILM_COUNT = 20;
 
 const generateFilms = () => {
-  return Array(FILM_COUNT).fill({TITLES}).map(() => {
+  return Array.from(Array(FILM_COUNT).keys()).map(() => {
     return {
       name: getRandomArrayItem(TITLES),
       rating: Math.floor(Math.random() * 9) + `.` + Math.floor(Math.random() * 9),
