@@ -29,3 +29,46 @@ export const DESCRIPTIONS = [
   `The Martians Momar ("Mom Martian") and Kimar ("King Martian") are worried that their children Girmar ("Girl Martian") and Bomar ("Boy Marti…`,
   `In this short, Sindbad the Sailor (presumably Bluto playing a "role") proclaims himself, in song, to be the greatest sailor, adventurer and…`,
 ];
+
+export const COUNTRY = [
+  `USA`,
+  `RUS`,
+  `ITA`,
+  `FRA`,
+  `ESP`,
+];
+
+export const ACTORS = [
+  `Erich von Stroheim`,
+  `Mary Beth Hughes`,
+  `Dan Duryea`,
+];
+
+export const WRITERS = [
+  `Anne Wigton`,
+  `Heinz Herald`,
+  `Richard Weil`,
+];
+
+export const DIRECTOR = [
+  `Anthony Mann`,
+];
+
+export const DATE = [
+  `January`,
+  `February`,
+  `March`,
+  `April`,
+  `May`,
+  `June`,
+  `July`,
+  `August`,
+  `September`,
+  `October`,
+  `November`,
+  `December`,
+];
+
+export const DESCRWIDE = [
+  `The film opens following a murder at a cabaret in Mexico City in 1936, and then presents the events leading up to it in flashback. The Great Flamarion (Erich von Stroheim) is an arrogant, friendless, and misogynous marksman who displays his trick gunshot act in the vaudeville circuit. His show features a beautiful assistant, Connie (Mary Beth Hughes) and her drunken husband Al (Dan Duryea), Flamarion's other assistant. Flamarion falls in love with Connie, the movie's femme fatale, and is soon manipulated by her into killing her no good husband during one of their acts.`,
+];

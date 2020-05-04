@@ -1,28 +1,28 @@
 import {createElement} from "../utils.js";
 
-const createSectionTop = () => {
+const createSectionFilmDetailsDecsr = (descr) => {
+  const {description} = descr;
   return (
-    `<section class="films-list--extra">
-        <h2 class="films-list__title">Top rated</h2>
-        <div class="films-list__container"> </div>
-      </section>`
+    `<p class="film-details__film-description">
+        ${description}
+     </p>`
   );
 };
 
-export default class FilmSectionTop {
-  constructor() {
+export default class FilmDetailsDescr {
+  constructor(descr) {
+    this._descr = descr;
     this._element = null;
   }
 
   getTemplate() {
-    return createSectionTop();
+    return createSectionFilmDetailsDecsr(this._descr);
   }
 
   getElement() {
     if (!this._element) {
       this._element = createElement(this.getTemplate());
     }
-
     return this._element;
   }
 
