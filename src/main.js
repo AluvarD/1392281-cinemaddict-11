@@ -8,8 +8,18 @@ import FilmSectionTop from "./components/sectiontop.js";
 import FilmSectionCommented from "./components/sectioncommented.js";
 import Statistic from "./components/statistic.js";
 import {generateFilms} from "./mock/film.js";
+import {genrateDetailsTable} from "./mock/film.js";
+import {generateHead} from "./mock/film.js";
+import {generatePoster} from "./mock/film.js";
+import {generateDescrWide} from "./mock/film.js";
 import {generateNavigation} from "./mock/navigation.js";
 import {render, RenderPosition} from "./utils.js";
+import FilmDetails from "./components/filmdetails.js";
+import FilmDetailsTable from "./components/filmdetailstable.js";
+import FilmDetailsDescr from "./components/filmdetailsdescr.js";
+import FilmDetailsPoster from "./components/filmdetailsposter.js";
+import FilmDetailsTittle from "./components/filmdetailstittle.js";
+import FilmComments from "./components/filmdetailscomments.js";
 
 // render films
 const FILM_COUNT = 5;
@@ -91,3 +101,77 @@ renderFilmBoard(filmBoard, films, filmsTopCommented);
 const siteFooterElement = document.querySelector(`.footer`);
 const statisticElement = siteFooterElement.querySelector(`.footer__statistics`);
 render(statisticElement, new Statistic().getElement(), RenderPosition.BEFOREEND);
+
+// render film details
+const renderFilmDetailsTable = (filmDetailsTablePosition, table) => {
+  const genreDetails = new FilmDetailsTable(table);
+  render(filmDetailsTablePosition, genreDetails.getElement(), RenderPosition.BEFOREEND);
+};
+
+const renderFilmDetailsDescr = (filmDetailsTablePosition, descr) => {
+  const genreDetails = new FilmDetailsDescr(descr);
+  render(filmDetailsTablePosition, genreDetails.getElement(), RenderPosition.BEFOREEND);
+};
+
+const renderFilmDetailsPoster = (filmDetailsPosterPosition, poster) => {
+  const genreDetails = new FilmDetailsPoster(poster);
+  render(filmDetailsPosterPosition, genreDetails.getElement(), RenderPosition.AFTERBEGIN);
+};
+
+const renderFilmDetailsTittle = (filmDetailsTittlePosition, head) => {
+  const genreDetails = new FilmDetailsTittle(head);
+  render(filmDetailsTittlePosition, genreDetails.getElement(), RenderPosition.AFTERBEGIN);
+};
+
+const renderFilmComments = (filmDetailsCommentsPosition) => {
+  const comments = new FilmComments();
+  render(filmDetailsCommentsPosition, comments.getElement(), RenderPosition.AFTERBEGIN);
+};
+
+const renderFilmDetailsBoard = (siteDetailsElement, table, head, poster, descr) => {
+  const filmDetails = new FilmDetails();
+  render(siteDetailsElement, filmDetails.getElement(), RenderPosition.BEFOREEND);
+
+  const filmDetailsTittlePosition = document.querySelector(`.film-details__info`);
+  head.slice().forEach((name) => {
+    renderFilmDetailsTittle(filmDetailsTittlePosition, name);
+  });
+
+  const filmDetailsPosterPosition = document.querySelector(`.film-details__info-wrap`);
+  poster.slice().forEach((pos) => {
+    renderFilmDetailsPoster(filmDetailsPosterPosition, pos);
+  });
+
+  const filmDetailsTablePosition = document.querySelector(`.film-details__info`);
+  table.slice().forEach((info) => {
+    renderFilmDetailsTable(filmDetailsTablePosition, info);
+  });
+
+  descr.slice().forEach((desc) => {
+    renderFilmDetailsDescr(filmDetailsTablePosition, desc);
+  });
+
+  const filmDetailsCommentsPosition = document.querySelector(`.film-details__comments-list`);
+  renderFilmComments(filmDetailsCommentsPosition);
+
+  const filmDetailsCloseButton = document.querySelector(`.film-details__close-btn`);
+
+  filmDetailsCloseButton.addEventListener(`click`, () => {
+    filmDetails.getElement().remove();
+    filmDetails.removeElement();
+  });
+};
+
+const siteDetailsElement = document.querySelector(`.footer`);
+const filmPoster = document.querySelector(`.film-card__poster`);
+const table = genrateDetailsTable();
+const head = generateHead();
+const poster = generatePoster();
+const descr = generateDescrWide();
+console.log(poster);
+console.log(table);
+console.log(head);
+
+filmPoster.addEventListener(`click`, () => {
+  renderFilmDetailsBoard(siteDetailsElement, table, head, poster, descr);
+});
