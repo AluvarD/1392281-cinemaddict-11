@@ -1,4 +1,4 @@
-import {createElement} from "../utils.js";
+import AbstractComponent from "./abstract-component.js";
 
 const createSectionFilmDetails = (table) => {
   const {genre, country, director, wrirters, actors, hour, minute, date} = table;
@@ -39,25 +39,13 @@ const createSectionFilmDetails = (table) => {
   );
 };
 
-export default class FilmDetailsTable {
+export default class FilmDetailsTable extends AbstractComponent {
   constructor(table) {
+    super();
     this._table = table;
-
-    this._element = null;
   }
 
   getTemplate() {
     return createSectionFilmDetails(this._table);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }
