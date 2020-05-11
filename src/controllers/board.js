@@ -3,6 +3,7 @@ import ButtonShow from "../components/buttonshowmore.js";
 import FilmSectionTop from "../components/sectiontop.js";
 import FilmSectionCommented from "../components/sectioncommented.js";
 import {render, remove, RenderPosition} from "../utils/render.js";
+import Menu, {SortType} from "../components/sortmenu.js";
 
 // render films
 const FILM_COUNT_TOP_COMMENTED = 2;
@@ -16,13 +17,54 @@ const renderFilm = (filmElement, film) => {
   render(filmElement, filmCardComponent, RenderPosition.BEFOREEND);
 };
 
+const getSortedFilms = (films, sortType, from, to) => {
+  let sortedFilms = [];
+  const showingFilms = films.slice();
+
+  switch (sortType) {
+    case SortType.DATE:
+      sortedFilms = showingFilms.sort((a, b) => a.year - b.year);
+      break;
+    case SortType.RATING:
+      sortedFilms = showingFilms.sort((a, b) => a.rating - b.rating);
+      break;
+    case SortType.DEFAULT:
+      sortedFilms = showingFilms;
+      break;
+  }
+
+  return sortedFilms.slice(from, to);
+};
+
 export default class BoardController {
   constructor(container) {
+    this._showMoreButton = new ButtonShow();
+    this._sortComponent = new Menu();
     this._container = container;
   }
 
   render(films, filmsTopCommented) {
+
+    const showMoreButton = () => {
+      const buttonPosition = container.querySelector(`.films-list`);
+      render(buttonPosition, this._showMoreButton, RenderPosition.BEFOREEND);
+      this._showMoreButton.setClickHandler(() => {
+        const prevFilmCount = filmCountAtWork;
+        filmCountAtWork = filmCountAtWork + FILM_COUNT_BY_BUTTON;
+
+        films.slice(prevFilmCount, filmCountAtWork).forEach((film) => {
+          renderFilm(filmElement, film);
+        });
+
+        if (filmCountAtWork >= films.length) {
+          remove(this._showMoreButton);
+        }
+      });
+    };
+
     const container = this._container.getElement();
+
+    render(container, this._sortComponent, RenderPosition.AFTERBEGIN);
 
     let filmCountAtWork = FILM_COUNT_ON_START;
     const filmElement = siteMainElement.querySelector(`.films-list__container`);
@@ -32,21 +74,18 @@ export default class BoardController {
     });
 
     // render buttonshowmore
-    const showMoreButton = new ButtonShow();
-    const buttonPosition = container.querySelector(`.films-list`);
-    render(buttonPosition, showMoreButton, RenderPosition.BEFOREEND);
+    showMoreButton();
 
-    showMoreButton.setClickHandler(() => {
-      const prevFilmCount = filmCountAtWork;
-      filmCountAtWork = filmCountAtWork + FILM_COUNT_BY_BUTTON;
+    this._sortComponent.setSortTypeChangeHandler((sortType) => {
+      filmCountAtWork = FILM_COUNT_BY_BUTTON;
 
-      films.slice(prevFilmCount, filmCountAtWork).forEach((film) => {
+      const sortedFilms = getSortedFilms(films, sortType, 0, filmCountAtWork);
+
+      sortedFilms.slice(0, filmCountAtWork).forEach((film) => {
         renderFilm(filmElement, film);
       });
 
-      if (filmCountAtWork >= films.length) {
-        remove(showMoreButton);
-      }
+      showMoreButton();
     });
 
     // render top and commented film elements

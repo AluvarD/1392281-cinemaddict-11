@@ -15,7 +15,6 @@ import FilmSection from "./components/sectionfilm.js";
 
 const FILM_COUNT = 5;
 const FILM_COUNT_TOP_COMMENTED = 2;
-
 // render header
 const siteHeaderElement = document.querySelector(`.header`);
 render(siteHeaderElement, new Rating(), RenderPosition.BEFOREEND);
@@ -23,7 +22,7 @@ render(siteHeaderElement, new Rating(), RenderPosition.BEFOREEND);
 const siteMainElement = document.querySelector(`.main`);
 const navigations = generateNavigation();
 render(siteMainElement, new Navigation(navigations), RenderPosition.BEFOREEND);
-render(siteMainElement, new Menu(), RenderPosition.BEFOREEND);
+
 
 const films = generateFilms(FILM_COUNT);
 const filmsTopCommented = generateFilms(FILM_COUNT_TOP_COMMENTED);
