@@ -1,4 +1,4 @@
-import {createElement} from "../utils.js";
+import AbstractComponent from "./abstract-component.js";
 
 const createSectionFilmDetails = () => {
   return (
@@ -69,23 +69,13 @@ const createSectionFilmDetails = () => {
 };
 
 
-export default class FilmDetails {
-  constructor() {
-    this._element = null;
-  }
-
+export default class FilmDetails extends AbstractComponent {
   getTemplate() {
     return createSectionFilmDetails();
   }
 
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
+  setCloseHandler(handler) {
+    this.getElement().querySelector(`.film-details__close-btn`)
+      .addEventListener(`click`, handler);
   }
 }

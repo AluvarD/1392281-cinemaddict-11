@@ -1,4 +1,4 @@
-import {createElement} from "../utils.js";
+import AbstractComponent from "./abstract-component.js";
 
 const createSectionFilmDetailsDecsr = (descr) => {
   const {description} = descr;
@@ -9,24 +9,13 @@ const createSectionFilmDetailsDecsr = (descr) => {
   );
 };
 
-export default class FilmDetailsDescr {
+export default class FilmDetailsDescr extends AbstractComponent {
   constructor(descr) {
+    super();
     this._descr = descr;
-    this._element = null;
   }
 
   getTemplate() {
     return createSectionFilmDetailsDecsr(this._descr);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

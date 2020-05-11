@@ -1,4 +1,4 @@
-import {createElement} from "../utils.js";
+import AbstractComponent from "./abstract-component.js";
 
 const createSectionFilmDetailsTittle = (head) => {
   const {name, rating} = head;
@@ -16,24 +16,13 @@ const createSectionFilmDetailsTittle = (head) => {
   );
 };
 
-export default class FilmDetailsPosterTittle {
+export default class FilmDetailsPosterTittle extends AbstractComponent {
   constructor(head) {
+    super();
     this._head = head;
-    this._element = null;
   }
 
   getTemplate() {
     return createSectionFilmDetailsTittle(this._head);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }
